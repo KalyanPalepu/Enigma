@@ -66,7 +66,7 @@ void loop() {
     incrementRotors();
     writeLamp(rotorEncodeAll(pressed));
 
-    wire.beginTransmission(8);
+    Wire.beginTransmission(8);
     Wire.write(rotorOnePlace);
     Wire.write(rotorTwoPlace);
     Wire.write(rotorThreePlace);
@@ -112,12 +112,12 @@ void writeLamp(char key){
 }
 
 void writeRow(char row[], char key){
-  digitalWrite(lamp[8], 1)
-  for(int i = 0; i < (sizeof(row) / sizeof(char)); i++{
+  digitalWrite(lamp[8], 1);
+  for(int i = 0; i < (sizeof(row) / sizeof(char)); i++){
     if(row[i] == key){
-      digitalWrite(lamp[index], 0)
+      digitalWrite(lamp[i], 0);
     } else{
-      digitalWrite(lamp[index], 1)
+      digitalWrite(lamp[i], 1);
     }
   }
 }
