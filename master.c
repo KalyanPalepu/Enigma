@@ -16,6 +16,8 @@ char thirdRow[] = {'P', 'Y', 'X', 'C', 'V', 'B', 'N', 'M', 'L'};
                              { 1,1,1,1,1,1,1,0,1 },  // = I or K or M
                              { 1,1,1,1,1,1,1,1,0 }   // = O or      L
                             };*/
+                            
+char lastPressed = '?';
 
 
 
@@ -58,7 +60,7 @@ void setup() {
 
 void loop() {
   char pressed = readKey();
-  if(readKey != '\0'){
+  if(pressed != '?' && pressed != lastPressed){
     Serial.println(pressed);
 
     incrementRotors();
@@ -73,7 +75,7 @@ void loop() {
 
 //util functions
 boolean arrayContains(char array[], char element){
-  for(int i = 0; i < (sizeof(array) / sizeof(char); i++){
+  for(int i = 0; i < (sizeof(array) / sizeof(char)); i++){
     if(array[i] == element){
       return true;
     }
@@ -88,21 +90,24 @@ void writeLamp(char key){
     digitalWrite(lanode[0], 1);
     digitalWrite(lanode[1], 0);
     digitalWrite(lanode[2], 0);
-    writeRow(firstRow, key)
+    writeRow(firstRow, key);
   }
 
   if(arrayContains(secondRow, key)){
     digitalWrite(lanode[0], 0);
     digitalWrite(lanode[1], 1);
     digitalWrite(lanode[2], 0);
-    writeRow(secondRow, key)
+    writeRow(secondRow, key);
   }
 
   if(arrayContains(thirdRow, key)){
     digitalWrite(lanode[0], 0);
     digitalWrite(lanode[1], 0);
     digitalWrite(lanode[2], 1);
-    writeRow(thirdRow, key)
+    writeRow(thirdRow, key);
+  }
+  else{
+    Serial.println(key);
   }
 }
 
@@ -153,7 +158,7 @@ char readKey() {
   else if (reading <= 265) return 'E';
   else if (reading <= 400) return 'W';
 
-  return '\0';
+  return '?';
 }
 
 //encoding functions
