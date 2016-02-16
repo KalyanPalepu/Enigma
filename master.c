@@ -56,6 +56,10 @@ void setup() {
   for(int i = 1; i < ringThree; i++){
     ringTurnRotor(rotorThree);
   }
+  for (int index = 0 ; index <= 8; index++) {
+    pinMode (lamp[index], OUTPUT);
+    digitalWrite (lamp[index], 1);
+  }
 }
 
 void loop() {
