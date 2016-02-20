@@ -50,7 +50,7 @@ char turnoverThree = 'N';
 void setup() {
   Serial.begin(9600);
 
-  Wire.begin();
+  Wire.begin(8);
   for(int i = 1; i < ringOne; i++){
     ringTurnRotor(rotorOne);
   }
@@ -68,6 +68,7 @@ void setup() {
 
 void loop() {
   char pressed = readKey();
+  //char pressed = Serial.read();
   if(pressed == '?'){
     lampOff();
   }
@@ -76,9 +77,11 @@ void loop() {
     incrementRotors();
 
     Wire.beginTransmission(8);
+    
     Wire.write(rotorOnePlace);
     Wire.write(rotorTwoPlace);
     Wire.write(rotorThreePlace);
+    Wire.endTransmission();
   }
   lastPressed = pressed;
   Serial.println(pressed);
@@ -246,7 +249,3 @@ void ringTurnRotor(char rotor[26]){ //clockwise
   }
   rotor[0] = last;
 }
-
-
-
-
