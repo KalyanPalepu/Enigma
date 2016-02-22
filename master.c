@@ -107,8 +107,8 @@ void loop() {
     Wire.endTransmission();
   }
   lastPressed = pressed;
-  Serial.println(pressed);
-  delay(20);
+  //Serial.println(pressed);
+  
   if (reset()) {
     rotorThreePlace = 'A';
     rotorTwoPlace = 'A';
@@ -129,6 +129,8 @@ void loop() {
     }
     openingSequence();
   }
+  delay(20);
+
 }
 
 //util functions
@@ -166,21 +168,21 @@ void writeLamp(char key) {
     writeRow(firstRow, key, 9);
   }
 
-  if (arrayContains(secondRow, key, 8)) {
+  else if (arrayContains(secondRow, key, 8)) {
     digitalWrite(lanode[0], 0);
     digitalWrite(lanode[1], 1);
     digitalWrite(lanode[2], 0);
     writeRow(secondRow, key, 8);
   }
 
-  if (arrayContains(thirdRow, key, 9)) {
+  else if (arrayContains(thirdRow, key, 9)) {
     digitalWrite(lanode[0], 0);
     digitalWrite(lanode[1], 0);
     digitalWrite(lanode[2], 1);
     writeRow(thirdRow, key, 9);
   }
   else {
-    Serial.println("Error: Invalid Key");
+    Serial.println(key);
   }
 }
 
